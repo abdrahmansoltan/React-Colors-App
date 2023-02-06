@@ -18,6 +18,13 @@ export default class ColorBox extends Component {
     return (
       <CopyToClipboard text={background.toUpperCase()} onCopy={this.changeCopyState}>
         <div style={{ background }} className='ColorBox'>
+          {/* copy-overlay & message */}
+          <div style={{ background }} className={`copy-overlay ${this.state.isCopied && 'show'}`} />
+          <div className={`copy-msg ${this.state.isCopied && 'show'}`}>
+            <h1>copied!</h1>
+            <p>{background}</p>
+          </div>
+
           <div className='copy-container'>
             <div className='box-content'>
               <span>{name}</span>
