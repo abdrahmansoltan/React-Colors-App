@@ -46,3 +46,14 @@
   margin-left: -7px;
   margin-top: -3px;
 }
+
+/* format selection */
+.select-container {
+  margin-right: 0.5rem;
+  margin-left: auto;
+}
+
+.MuiSelect-select {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
