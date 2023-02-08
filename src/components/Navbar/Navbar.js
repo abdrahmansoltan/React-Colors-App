@@ -10,6 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class Navbar extends Component {
     return (
       <header className='Navbar'>
         <div className='logo'>
-          <a href='#'>React Colors</a>
+          <Link to='/'>React Colors</Link>
         </div>
         <div className='slider-container'>
           <span>Level: {level}</span>
