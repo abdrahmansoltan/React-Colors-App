@@ -26,7 +26,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, showingAllColors } = this.props;
     const { format, open } = this.state;
     const SnackbarActionEl = (
       <React.Fragment>
@@ -46,12 +46,14 @@ class Navbar extends Component {
         <div className='logo'>
           <Link to='/'>React Colors</Link>
         </div>
-        <div className='slider-container'>
-          <span>Level: {level}</span>
-          <div className='slider'>
-            <Slider defaultValue={level} min={100} max={900} step={100} onChange={changeLevel} />
+        {showingAllColors && (
+          <div className='slider-container'>
+            <span>Level: {level}</span>
+            <div className='slider'>
+              <Slider defaultValue={level} min={100} max={900} step={100} onChange={changeLevel} />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className='select-container'>
           <FormControl className='FormControl' sx={{ m: 1, minWidth: 80 }}>
