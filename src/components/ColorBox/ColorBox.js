@@ -15,7 +15,7 @@ export default class ColorBox extends Component {
     }, 1500);
   };
   render() {
-    const { name, background, moreUrl } = this.props;
+    const { name, background, moreUrl, showLink } = this.props;
     return (
       <CopyToClipboard text={background.toUpperCase()} onCopy={this.changeCopyState}>
         <div style={{ background }} className='ColorBox'>
@@ -32,9 +32,12 @@ export default class ColorBox extends Component {
             </div>
             <button className='copy-button'>Copy</button>
           </div>
-          <Link to={moreUrl} onClick={e => e.stopPropagation()}>
-            <span className='see-more'>More</span>
-          </Link>
+          {/* conditional "See More" link */}
+          {showLink && (
+            <Link to={moreUrl} onClick={e => e.stopPropagation()}>
+              <span className='see-more'>More</span>
+            </Link>
+          )}
         </div>
       </CopyToClipboard>
     );
