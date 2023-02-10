@@ -17,6 +17,10 @@ export default {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    '& a': {
+      color: 'white'
+    },
     marginBottom: '3rem',
     color: 'white'
   },

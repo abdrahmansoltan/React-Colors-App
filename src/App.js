@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
+import NewPaletteForm from './components/NewPaletteForm/NewPaletteForm';
 import Palette from './components/Palette/Palette';
 import PaletteList from './components/PaletteList/PaletteList';
 import SingleColorPalette from './components/SingleColorPalette/SingleColorPalette';
@@ -11,6 +12,8 @@ function App() {
   };
   return (
     <Switch>
+      {/* Must be before "/palette/" with dynamic child route */}
+      <Route exact path='/palette/new' render={() => <NewPaletteForm />} />
       <Route
         exact
         path='/palette/:paletteId/:colorId'
