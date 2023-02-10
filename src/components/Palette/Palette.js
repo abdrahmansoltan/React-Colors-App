@@ -3,18 +3,7 @@ import React, { Component } from 'react';
 import ColorBox from '../ColorBox/ColorBox';
 import Navbar from '../Navbar/Navbar';
 import PaletteFooter from '../PaletteFooter/PaletteFooter';
-import './Palette.css';
-
-const styles = {
-  Palette: {
-    height: '98vh',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  colors: {
-    height: '90%'
-  }
-};
+import styles from './Palette.styles';
 
 export class Palette extends Component {
   constructor(props) {

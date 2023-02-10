@@ -1,7 +1,10 @@
+import { withStyles } from '@material-ui/styles';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import React, { Component } from 'react';
-import './Navbar.css';
+import { Link } from 'react-router-dom';
+import styles from './Navbar.styles';
+
 // Material UI
 import CloseIcon from '@mui/icons-material/Close';
 import FormControl from '@mui/material/FormControl';
@@ -10,7 +13,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
-import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   constructor(props) {
@@ -26,7 +28,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { level, changeLevel, showingAllColors } = this.props;
+    const { level, changeLevel, showingAllColors, classes } = this.props;
     const { format, open } = this.state;
     const SnackbarActionEl = (
       <React.Fragment>
@@ -42,20 +44,20 @@ class Navbar extends Component {
     );
 
     return (
-      <header className='Navbar'>
-        <div className='logo'>
+      <header className={classes.Navbar}>
+        <div className={classes.logo}>
           <Link to='/'>React Colors</Link>
         </div>
         {showingAllColors && (
-          <div className='slider-container'>
+          <div>
             <span>Level: {level}</span>
-            <div className='slider'>
+            <div className={classes.slider}>
               <Slider defaultValue={level} min={100} max={900} step={100} onChange={changeLevel} />
             </div>
           </div>
         )}
 
-        <div className='select-container'>
+        <div className={classes.selectContainer}>
           <FormControl className='FormControl' sx={{ m: 1, minWidth: 80 }}>
             <InputLabel id='demo-simple-select-autowidth-label'>Format</InputLabel>
             <Select
@@ -84,4 +86,4 @@ class Navbar extends Component {
     );
   }
 }
-export default Navbar;
+export default withStyles(styles)(Navbar);
