@@ -1,17 +1,38 @@
+import { withStyles } from '@material-ui/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { ChromePicker } from 'react-color';
 
-const drawerWidth = 240;
+const styles = {
+  picker: {
+    width: '100% !important',
+    marginTop: '2rem'
+  },
+  addColor: {
+    width: '100%',
+    padding: '1rem',
+    marginTop: '1rem',
+    fontSize: '2rem'
+  },
+  buttonsContainer: {
+    paddingTop: '1rem',
+    display: 'flex',
+    justifyContent: 'space-around'
+  }
+};
+
+const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(({ theme, open }) => ({
   flexGrow: 1,
@@ -56,8 +77,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end'
 }));
 
-export default function NewPaletteForm() {
-  const [open, setOpen] = React.useState(false);
+const NewPaletteForm = ({ classes }) => {
+  const [open, setOpen] = React.useState(true);
+  const [currentColor, setCurrentColor] = React.useState('teal');
+  const [colors, setColors] = React.useState(['red', 'blue']);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -65,6 +88,15 @@ export default function NewPaletteForm() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const updateCurrentColor = newColor => {
+    setCurrentColor(newColor.hex);
+  };
+
+  const addNewColor = () => {
+    setColors([...colors, currentColor]);
+    console.log(colors);
   };
 
   return (
@@ -103,11 +135,38 @@ export default function NewPaletteForm() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        {/* Content Goes Here */}
+
+        {/* Drawer Content */}
+        <Typography variant='h4' align='center'>
+          Design Your Palette
+        </Typography>
+        <div className={classes.buttonsContainer}>
+          <Button variant='contained' color='secondary'>
+            Clear Palette
+          </Button>
+          <Button variant='contained' color='primary'>
+            Random Color
+          </Button>
+        </div>
+        <ChromePicker
+          color={currentColor}
+          className={classes.picker}
+          onChangeComplete={newColor => updateCurrentColor(newColor)}
+        />
+        <Button
+          variant='contained'
+          color='primary'
+          style={{ backgroundColor: currentColor }}
+          className={classes.addColor}
+          onClick={addNewColor}>
+          Add Color
+        </Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
       </Main>
     </Box>
   );
-}
+};
+
+export default withStyles(styles)(NewPaletteForm);
