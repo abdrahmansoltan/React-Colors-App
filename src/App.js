@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NewPaletteForm from './components/NewPaletteForm/NewPaletteForm';
 import Palette from './components/Palette/Palette';
@@ -7,13 +8,26 @@ import { generatePalette } from './helpers/colorHelpers';
 import seedColors from './models/seedColors';
 
 function App() {
+  const [palettes, setPalettes] = useState(seedColors);
+
   const findPalette = id => {
-    return seedColors.find(palette => palette.id === id);
+    return palettes.find(palette => palette.id === id);
   };
+  const savePalette = newPalette => {
+    console.log(newPalette);
+    setPalettes([...palettes, newPalette]);
+  };
+
   return (
     <Switch>
       {/* Must be before "/palette/" with dynamic child route */}
-      <Route exact path='/palette/new' render={() => <NewPaletteForm />} />
+      <Route
+        exact
+        path='/palette/new'
+        render={routeProps => (
+          <NewPaletteForm savePalette={savePalette} palettes={palettes} {...routeProps} />
+        )}
+      />
       <Route
         exact
         path='/palette/:paletteId/:colorId'
@@ -27,7 +41,7 @@ function App() {
       <Route
         exact
         path='/'
-        render={routeProps => <PaletteList palettes={seedColors} {...routeProps} />}
+        render={routeProps => <PaletteList palettes={palettes} {...routeProps} />}
       />
       <Route
         exact

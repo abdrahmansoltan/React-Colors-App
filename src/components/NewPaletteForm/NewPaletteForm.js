@@ -82,12 +82,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end'
 }));
 
-const NewPaletteForm = ({ classes }) => {
+const NewPaletteForm = ({ classes, savePalette, palettes, history }) => {
   const formRef = React.useRef('form');
+  // State
   const [open, setOpen] = React.useState(true);
   const [currentColor, setCurrentColor] = React.useState('teal');
   const [colors, setColors] = React.useState([{ color: 'blue', name: 'blue' }]);
-  const [newName, setNewName] = React.useState('');
+  const [newColorName, setNewColorName] = React.useState('');
+  const [newPaletteName, setNewPaletteName] = React.useState('');
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -104,15 +106,31 @@ const NewPaletteForm = ({ classes }) => {
   const addNewColor = () => {
     const newColor = {
       color: currentColor,
-      name: newName
+      name: newColorName
     };
-    console.log(newColor);
     setColors([...colors, newColor]);
-    setNewName('');
+    setNewColorName('');
   };
 
   const handleChange = event => {
-    setNewName(event.target.value);
+    if (event.target.name === 'newColorName') {
+      setNewColorName(event.target.value);
+    }
+    if (event.target.name === 'newPaletteName') {
+      setNewPaletteName(event.target.value);
+    }
+  };
+
+  const handleSubmit = () => {
+    let newName = newPaletteName;
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, '-'),
+      colors: colors
+    };
+
+    savePalette(newPalette);
+    history.push('/');
   };
 
   React.useEffect(() => {
@@ -122,12 +140,15 @@ const NewPaletteForm = ({ classes }) => {
     ValidatorForm.addValidationRule('isColorUnique', value =>
       colors.every(({ color }) => color !== currentColor)
     );
+    ValidatorForm.addValidationRule('isPaletteNameUnique', value =>
+      palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
+    );
   });
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position='fixed' open={open}>
+      <AppBar position='fixed' color='default' open={open}>
         <Toolbar>
           <IconButton
             color='inherit'
@@ -140,6 +161,21 @@ const NewPaletteForm = ({ classes }) => {
           <Typography variant='h6' noWrap component='div'>
             Create A Palette
           </Typography>
+
+          {/* Save Palette Form */}
+          <ValidatorForm onSubmit={handleSubmit}>
+            <TextValidator
+              label='Palette Name'
+              value={newPaletteName}
+              name='newPaletteName'
+              onChange={handleChange}
+              validators={['required', 'isPaletteNameUnique']}
+              errorMessages={['Enter Palette Name', 'Name already used']}
+            />
+            <Button variant='contained' color='primary' type='submit'>
+              Save Palette
+            </Button>
+          </ValidatorForm>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -180,7 +216,8 @@ const NewPaletteForm = ({ classes }) => {
         />
         <ValidatorForm onSubmit={addNewColor} ref={formRef}>
           <TextValidator
-            value={newName}
+            value={newColorName}
+            name='newColorName'
             onChange={handleChange}
             validators={['required', 'isColorNameUnique', 'isColorUnique']}
             errorMessages={[
