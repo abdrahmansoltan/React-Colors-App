@@ -11,11 +11,7 @@ const styles = {
     display: 'inline-block',
     position: 'relative',
     cursor: 'pointer',
-    marginBottom: '-3.5px',
-    '&:hover svg': {
-      color: 'white',
-      transform: 'scale(1.5)'
-    }
+    marginBottom: '-3.5px'
   },
   boxContent: {
     position: 'absolute',
@@ -31,7 +27,11 @@ const styles = {
     justifyContent: 'space-between'
   },
   deleteIcon: {
-    transition: 'all 0.3s ease-in-out'
+    transition: 'all 0.3s ease-in-out',
+    '&:hover': {
+      color: 'white',
+      transform: 'scale(1.5)'
+    }
   }
 };
 

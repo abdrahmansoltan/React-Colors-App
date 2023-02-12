@@ -279,6 +279,7 @@ const NewPaletteForm = ({ classes, savePalette, palettes, history }) => {
           removeColor={removeColor}
           axis='xy'
           onSortEnd={onSortEnd}
+          pressDelay={160}
         />
       </Main>
     </Box>
