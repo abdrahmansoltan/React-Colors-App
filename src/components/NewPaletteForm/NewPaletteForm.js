@@ -14,7 +14,8 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { ChromePicker } from 'react-color';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-import DraggableColorBox from '../DraggableColorBox/DraggableColorBox';
+import { arrayMove } from 'react-sortable-hoc';
+import DraggableColorList from '../DraggableColorList';
 
 const styles = {
   buttonsContainer: {
@@ -87,7 +88,7 @@ const NewPaletteForm = ({ classes, savePalette, palettes, history }) => {
   // State
   const [open, setOpen] = React.useState(true);
   const [currentColor, setCurrentColor] = React.useState('teal');
-  const [colors, setColors] = React.useState([{ color: 'blue', name: 'blue' }]);
+  const [colors, setColors] = React.useState(palettes[0].colors);
   const [newColorName, setNewColorName] = React.useState('');
   const [newPaletteName, setNewPaletteName] = React.useState('');
 
@@ -135,6 +136,10 @@ const NewPaletteForm = ({ classes, savePalette, palettes, history }) => {
 
   const removeColor = colorName => {
     setColors(colors.filter(color => color.name !== colorName));
+  };
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setColors(arrayMove(colors, oldIndex, newIndex));
   };
 
   React.useEffect(() => {
@@ -244,14 +249,12 @@ const NewPaletteForm = ({ classes, savePalette, palettes, history }) => {
 
       <Main open={open}>
         <DrawerHeader />
-        {colors.map(color => (
-          <DraggableColorBox
-            key={color.name}
-            color={color.color}
-            name={color.name}
-            handleClick={() => removeColor(color.name)}
-          />
-        ))}
+        <DraggableColorList
+          colors={colors}
+          removeColor={removeColor}
+          axis='xy'
+          onSortEnd={onSortEnd}
+        />
       </Main>
     </Box>
   );
