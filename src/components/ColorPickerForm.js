@@ -10,10 +10,12 @@ const styles = {
     marginTop: '2rem'
   },
   colorNameInput: {
-    width: '100%'
+    width: '100%',
+    height: '70px'
   },
   addColor: {
     width: '100%',
+    padding: '1rem !important',
     marginTop: '1rem !important',
     fontSize: '2rem !important'
   }
@@ -54,7 +56,7 @@ class ColorPickerForm extends Component {
     const { currentColor, newColorName } = this.state;
 
     return (
-      <div>
+      <div style={{ width: '100%' }}>
         <ChromePicker
           color={currentColor}
           className={classes.picker}
@@ -64,6 +66,9 @@ class ColorPickerForm extends Component {
           <TextValidator
             value={newColorName}
             name='newColorName'
+            placeholder='Color Name'
+            variant='filled'
+            margin='normal'
             onChange={this.handleChange}
             validators={['required', 'isColorNameUnique', 'isColorUnique']}
             errorMessages={[

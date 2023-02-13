@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import classNames from 'classnames';
 import React, { Component } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 
@@ -20,6 +19,11 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   }),
+  height: '64px',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
@@ -48,7 +52,7 @@ class PaletteFormNav extends Component {
     });
   };
   render() {
-    const { classes, open } = this.props;
+    const { open } = this.props;
     const { newPaletteName } = this.state;
     return (
       <div>
@@ -66,8 +70,10 @@ class PaletteFormNav extends Component {
             <Typography variant='h6' noWrap component='div'>
               Create A Palette
             </Typography>
+          </Toolbar>
 
-            {/* Save Palette Form */}
+          {/* Save Palette Form */}
+          <div>
             <ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
               <TextValidator
                 label='Palette Name'
@@ -80,13 +86,13 @@ class PaletteFormNav extends Component {
               <Button variant='contained' color='primary' type='submit'>
                 Save Palette
               </Button>
-              <Link to='/' style={{ textDecoration: 'none' }}>
-                <Button variant='contained' color='secondary'>
-                  Go Back
-                </Button>
-              </Link>
             </ValidatorForm>
-          </Toolbar>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <Button variant='contained' color='secondary'>
+                Go Back
+              </Button>
+            </Link>
+          </div>
         </AppBar>
       </div>
     );
