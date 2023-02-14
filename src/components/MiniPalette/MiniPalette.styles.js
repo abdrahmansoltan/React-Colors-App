@@ -5,8 +5,24 @@ export default {
     borderRadius: '5px',
     padding: '0.5rem',
     position: 'relative',
+    cursor: 'pointer',
+    '&:hover svg': {
+      opacity: 1
+    }
+  },
+  deleteIcon: {
+    color: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: '#eb3d30',
+    width: '20px',
+    height: '20px',
+    position: 'absolute',
+    right: '0px',
+    top: '0px',
+    padding: '10px',
+    zIndex: 10,
+    opacity: 0,
     '&:hover': {
-      cursor: 'pointer'
+      color: 'white'
     }
   },
   colors: {

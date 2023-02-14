@@ -14,6 +14,11 @@ function App() {
   const findPalette = id => {
     return palettes.find(palette => palette.id === id);
   };
+
+  const deletePalette = id => {
+    setPalettes(palettes.filter(palette => palette.id !== id));
+  };
+
   const savePalette = newPalette => {
     setPalettes([...palettes, newPalette]);
   };
@@ -50,7 +55,9 @@ function App() {
       <Route
         exact
         path='/'
-        render={routeProps => <PaletteList palettes={palettes} {...routeProps} />}
+        render={routeProps => (
+          <PaletteList palettes={palettes} {...routeProps} deletePalette={deletePalette} />
+        )}
       />
       <Route
         exact

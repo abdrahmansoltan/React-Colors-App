@@ -9,7 +9,7 @@ class PaletteList extends Component {
     this.props.history.push(`/palette/${id}`);
   }
   render() {
-    const { palettes, classes } = this.props;
+    const { palettes, classes, deletePalette } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -23,6 +23,7 @@ class PaletteList extends Component {
                 key={palette.id}
                 {...palette}
                 handleClick={() => this.goToPalette(palette.id)}
+                handleDelete={deletePalette}
               />
             ))}
           </div>
