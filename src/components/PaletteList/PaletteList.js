@@ -1,4 +1,5 @@
 import { withStyles } from '@material-ui/styles';
+import { Button } from '@mui/material';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MiniPalette from '../MiniPalette/MiniPalette';
@@ -17,16 +18,26 @@ class PaletteList extends Component {
             <h1>React Colors</h1>
             <Link to='/palette/new'>Create Palette</Link>
           </nav>
-          <div className={classes.palettes}>
-            {palettes.map(palette => (
-              <MiniPalette
-                key={palette.id}
-                {...palette}
-                handleClick={() => this.goToPalette(palette.id)}
-                handleDelete={deletePalette}
-              />
-            ))}
-          </div>
+          {palettes.length > 0 ? (
+            <div className={classes.palettes}>
+              {palettes.map(palette => (
+                <MiniPalette
+                  key={palette.id}
+                  {...palette}
+                  handleClick={() => this.goToPalette(palette.id)}
+                  handleDelete={deletePalette}
+                />
+              ))}
+            </div>
+          ) : (
+            <Button
+              variant='contained'
+              color='primary'
+              className={classes.addColor}
+              onClick={() => window.location.reload()}>
+              Refresh Page
+            </Button>
+          )}
         </div>
       </div>
     );

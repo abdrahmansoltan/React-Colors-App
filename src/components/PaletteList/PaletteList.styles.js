@@ -30,5 +30,12 @@ export default {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 30%)',
     gridGap: '5%'
+  },
+  addColor: {
+    width: '100%',
+    padding: '1rem !important',
+    marginTop: '1rem !important',
+    fontSize: '2rem !important',
+    backgroundColor: '#9c27b0 !important'
   }
 };

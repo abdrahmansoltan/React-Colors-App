@@ -24,8 +24,12 @@ function App() {
   };
 
   const syncLocalStorage = () => {
-    //save palettes to local storage
-    window.localStorage.setItem('palettes', JSON.stringify(palettes));
+    if (palettes.length === 0) {
+      window.localStorage.removeItem('palettes');
+    } else {
+      //save palettes to local storage
+      window.localStorage.setItem('palettes', JSON.stringify(palettes));
+    }
   };
 
   useEffect(() => {
