@@ -9,6 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import sizes from '../helpers/sizes';
 import PaletteMetaForm from './NewPaletteForm/PaletteMetaForm';
 
 const drawerWidth = 400;
@@ -20,10 +21,17 @@ const styles = {
     marginRight: '1rem',
     '& a': {
       textDecoration: 'none'
+    },
+    [sizes.down('xs')]: {
+      marginRight: '0.5rem'
     }
   },
   button: {
-    margin: '0 0.5rem !important'
+    margin: '0 0.5rem !important',
+    [sizes.down('xs')]: {
+      margin: '0 0.2rem !important',
+      padding: '0.3rem !important'
+    }
   }
 };
 const AppBar = styled(MuiAppBar, {
