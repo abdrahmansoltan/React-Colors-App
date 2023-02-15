@@ -7,8 +7,9 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import { useState } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
+import seedColors from '../../models/seedColors';
 import ColorPickerForm from '../ColorPickerForm';
 import DraggableColorList from '../DraggableColorList';
 import PaletteFormNav from '../PaletteFormNav';
@@ -62,8 +63,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const NewPaletteForm = ({ classes, savePalette, palettes, history }) => {
   // State
-  const [open, setOpen] = React.useState(true);
-  const [colors, setColors] = React.useState(palettes[0].colors);
+  const [open, setOpen] = useState(true);
+  const [colors, setColors] = useState(seedColors[0].colors);
 
   // Constants
   const defaultProps = {
