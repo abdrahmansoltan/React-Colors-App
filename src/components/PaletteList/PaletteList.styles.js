@@ -1,4 +1,4 @@
-import bg from '../../assets/sun-tornado.png';
+import bg from '../../assets/sun-tornado.jpg';
 import sizes from '../../helpers/sizes';
 export default {
   // React TransitionGroup custom styles
@@ -20,7 +20,6 @@ export default {
     /* background by SVGBackgrounds.com */
     backgroundImage: `url(${bg})`,
     overflowY: 'scroll',
-    paddingBottom: '1rem'
   },
   container: {
     width: '50%',
