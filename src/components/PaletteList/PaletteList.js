@@ -52,8 +52,7 @@ class PaletteList extends Component {
                   <MiniPalette
                     key={palette.id}
                     {...palette}
-                    handleClick={() => this.goToPalette(palette.id)}
-                    // handleDelete={deletePalette}
+                    goToPalette={this.goToPalette}
                     openDialog={this.openDialog}
                   />
                 </CSSTransition>
