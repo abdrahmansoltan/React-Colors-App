@@ -4,11 +4,11 @@ import React from 'react';
 import styles from './MiniPalette.styles';
 
 function MiniPalette(props) {
-  const { classes, paletteName, id, emoji, colors, handleDelete } = props;
+  const { classes, paletteName, id, emoji, colors, openDialog } = props;
 
   const deletePalette = e => {
     e.stopPropagation(); // to prevent triggering the click event on the miniPalette
-    handleDelete(id);
+    openDialog(id);
   };
 
   const miniColorBoxes = colors.map(color => (
