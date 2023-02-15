@@ -51,7 +51,7 @@ export default {
         marginLeft: '-7px',
         marginTop: '-3px'
       },
-    [sizes.down('md')]: {
+    [sizes.down('sm')]: {
       width: '150px'
     }
   },
@@ -59,8 +59,8 @@ export default {
     marginLeft: 'auto',
     marginRight: '0.5rem',
     '& .MuiSelect-select': {
-      paddingTop: '8px !important',
-      paddingBottom: '8px !important'
+      paddingTop: '6px !important',
+      paddingBottom: '4px !important'
     }
   }
 };
